@@ -1,4 +1,4 @@
-//Getter untuk mendapat nilai dari kamus [A-Z, a-z, spasi]
+// Getter untuk nilai kamus
 function getDictionaryValue(char) {
   if (char === " ") return 0;
 
@@ -69,14 +69,50 @@ function getDictionaryValue(char) {
   return "";
 }
 
-//Mengonversi kata menjadi bilangan
+//============Tugas Nomer 1 logic dan codingannya======================
+// Mengonversi kata menjadi bilangan
 function converToNumber(input) {
   return input.split("").map(getDictionaryValue).join("");
 }
 
-//fungsi untuk konversi abjad ke number
+//konversi kalimat atau kata ke bilangan atau angka
 function handleConvert() {
   const inputText = document.getElementById("inputText").value;
   const output = inputText.split("\n").map((line) => converToNumber(line));
-  document.getElementById("output").innerHTML = output.join("<br>");
+  document.getElementById("outputConversion").innerHTML = output.join("<br>");
+}
+
+//============Tugas nomer 2 logic dan codingannya=====================
+// Fungsi untuk menambahkan tanda "+" dan "-" secara bergantian
+function addOperators(numbers) {
+  let result = "";
+  for (let i = 0; i < numbers.length; i++) {
+    result += numbers[i];
+    if (i < numbers.length - 1) {
+      result += i % 2 === 0 ? "+" : "-";
+    }
+  }
+  return result;
+}
+
+// Fungsi untuk menghitung hasil penjumlahan dan pengurangan aritmatika
+function calculateOperators(operator) {
+  return eval(operator);
+}
+
+// Proses perhitungan penjumlahan dan pengurangan
+function handleCalculate() {
+  const inputText = document.getElementById("inputText").value;
+  const outputNumbers = inputText
+    .split("\n")
+    .map((line) => converToNumber(line)); // Konversi kalimat ke angka
+
+  const Operators = outputNumbers.map(addOperators); // Tambahkan operator
+  const results = Operators.map(calculateOperators); // Hitung hasil
+
+  const operatorOutput = Operators.join("<br>");
+  const calculationOutput = results.join("<br>");
+
+  document.getElementById("outputOperator").innerHTML = operatorOutput;
+  document.getElementById("outputCalculation").innerHTML = calculationOutput;
 }
