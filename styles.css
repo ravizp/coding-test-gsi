@@ -10,9 +10,7 @@ textarea {
   font-size: 16px;
 }
 
-#outputConversion,
-#outputOperator,
-#outputCalculation {
+div {
   white-space: pre-wrap;
   background: #f9f9f9;
   padding: 10px;

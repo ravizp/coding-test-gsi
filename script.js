@@ -1,4 +1,4 @@
-// Getter untuk nilai kamus
+// Getter untuk nilai kamus utama
 function getDictionaryValue(char) {
   if (char === " ") return 0;
 
@@ -69,21 +69,19 @@ function getDictionaryValue(char) {
   return "";
 }
 
-//============Tugas Nomer 1 logic dan codingannya======================
+//===============Jawaban untuk tugas nomer 1 ========================
 // Mengonversi kata menjadi bilangan
 function converToNumber(input) {
   return input.split("").map(getDictionaryValue).join("");
 }
 
-//konversi kalimat atau kata ke bilangan atau angka
 function handleConvert() {
   const inputText = document.getElementById("inputText").value;
   const output = inputText.split("\n").map((line) => converToNumber(line));
   document.getElementById("outputConversion").innerHTML = output.join("<br>");
 }
 
-//============Tugas nomer 2 logic dan codingannya=====================
-// Fungsi untuk menambahkan tanda "+" dan "-" secara bergantian
+//=====================Jawaban untuk tugas nomer 2=====================
 function addOperators(numbers) {
   let result = "";
   for (let i = 0; i < numbers.length; i++) {
@@ -95,24 +93,126 @@ function addOperators(numbers) {
   return result;
 }
 
-// Fungsi untuk menghitung hasil penjumlahan dan pengurangan aritmatika
 function calculateOperators(operator) {
   return eval(operator);
 }
 
-// Proses perhitungan penjumlahan dan pengurangan
 function handleCalculate() {
   const inputText = document.getElementById("inputText").value;
   const outputNumbers = inputText
     .split("\n")
-    .map((line) => converToNumber(line)); // Konversi kalimat ke angka
+    .map((line) => converToNumber(line));
 
-  const Operators = outputNumbers.map(addOperators); // Tambahkan operator
-  const results = Operators.map(calculateOperators); // Hitung hasil
+  const Operators = outputNumbers.map(addOperators);
+  const results = Operators.map(calculateOperators);
 
   const operatorOutput = Operators.join("<br>");
   const calculationOutput = results.join("<br>");
 
   document.getElementById("outputOperator").innerHTML = operatorOutput;
   document.getElementById("outputCalculation").innerHTML = calculationOutput;
+}
+
+//================Jawaban untuk Tugas nomer 3 logic and code ==============
+const dictionary = {
+  0: "A",
+  1: "B",
+  2: "E",
+  3: "F",
+  4: "I",
+  5: "J",
+  6: "O",
+  7: "P",
+  8: "U",
+  9: "V",
+};
+
+// Generate pola penjumlahan
+function generateExplanation(target) {
+  let numbers = [];
+  let sum = 0;
+  let currentNumber = 0;
+
+  while (sum < target) {
+    if (sum + currentNumber > target) {
+      currentNumber = 0; // Reset ke 0 jika melebihi target
+    }
+    numbers.push(currentNumber);
+    sum += currentNumber;
+    currentNumber = (currentNumber + 1) % 10; // Angka berikutnya
+  }
+
+  return numbers;
+}
+
+// Proses untuk tugas nomor 3
+function handleAlphabetConversion() {
+  const inputText = document.getElementById("outputCalculation").innerText;
+  const results = inputText.split("\n").map((line) => Math.abs(parseInt(line)));
+
+  let detailedProcess = "";
+  let numberSequences = "";
+  let finalAlphabets = "";
+
+  results.forEach((result) => {
+    const numbers = generateExplanation(result);
+    const explanation = `${result} = ${numbers.join(" + ")}`;
+    const sequence = numbers.join("");
+    const alphabet = sequence
+      .split("")
+      .map((num) => dictionary[num])
+      .join("");
+
+    detailedProcess += explanation + "\n";
+    numberSequences += sequence + "\n";
+    finalAlphabets += alphabet + "\n";
+  });
+
+  document.getElementById("outputDetailedProcess").innerText =
+    detailedProcess.trim();
+  document.getElementById("outputNumbers").innerText = numberSequences.trim();
+  document.getElementById("outputAlphabets").innerText = finalAlphabets.trim();
+}
+
+// ========Jawaban untuk Tugas nomer 4 Code and Logic ==========================
+// Proses untuk tugas nomor 4
+function handleExtendedAlphabetConversion() {
+  const inputText = document.getElementById("outputDetailedProcess").innerText;
+  const explanationLines = inputText.split("\n");
+
+  let extendedProcess = "";
+  let extendedNumberSequences = "";
+  let extendedAlphabets = "";
+
+  explanationLines.forEach((line) => {
+    const [originalTarget, explanation] = line.split(" = ");
+    const target = parseInt(originalTarget) + 2;
+    const numbers = explanation.split(" + ").map(Number);
+
+    let sum = numbers.reduce((a, b) => a + b, 0);
+    let currentNumber = 1;
+    while (sum < target) {
+      sum += currentNumber;
+      numbers.push(currentNumber);
+      currentNumber++;
+    }
+
+    const newExplanation = `${target} = ${numbers.join(" + ")}`;
+    const sequence = numbers.join("");
+    const alphabet = sequence
+      .split("")
+      .map((num) => dictionary[num])
+      .join("");
+
+    extendedProcess += newExplanation + "\n";
+    extendedNumberSequences += sequence + "\n";
+    extendedAlphabets += alphabet + "\n";
+  });
+
+  document.getElementById("outputExtendedDetailedProcess").innerText =
+    extendedProcess.trim();
+  document.getElementById("outputExtendedNumbers").innerText =
+    extendedNumberSequences.trim();
+  document.getElementById("outputExtendedAlphabets").innerText =
+    extendedAlphabets.trim();
 }

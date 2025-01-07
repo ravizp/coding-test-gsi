@@ -3,25 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Konversi Kalimat ke Bilangan</title>
+    <title>Konversi Kalimat atau Kata ke Bilangan</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
-    <h2>Konversi Kalimat Ke Bilangan</h2>
-    <label for="inputText">Masukkan Kalimat:</label><br />
+    <h2>1. Konversi Kalimat atau Kata Ke Bilangan</h2>
+    <label for="inputText">Masukkan Kalimat atau Kata:</label><br />
     <textarea
       id="inputText"
       rows="5"
-      placeholder="Masukkan Inputan.."></textarea
+      placeholder="Masukkan Inputan.. Tekan enter untuk mendapatkan lebih banyak baris"></textarea
     ><br /><br />
-    <button onclick="handleConvert()">Konversi</button>
+    <button onclick="handleConvert()">Konversi Kata</button>
     <h3>Hasil Konversi:</h3>
     <div id="outputConversion"></div>
+    <h3>2. Menampilkan hasil nomer 2 dengan menekan button dibawah</h3>
     <button onclick="handleCalculate()">Tampilkan Proses Perhitungan</button>
     <h3>Proses Perhitungan:</h3>
     <div id="outputOperator"></div>
     <h3>Hasil Akhir Perhitungan:</h3>
     <div id="outputCalculation"></div>
+    <h3>3. Menampilkan hasil nomer 3 dengan menekan button dibawah</h3>
+    <button onclick="handleAlphabetConversion()">Konversi ke Huruf</button>
+    <h3>Proses Detail:</h3>
+    <div id="outputDetailedProcess"></div>
+    <h3>Hasil Angka:</h3>
+    <div id="outputNumbers"></div>
+    <h3>Hasil Akhir Huruf:</h3>
+    <div id="outputAlphabets"></div>
+    <h3>4. Menampilkan hasil nomer 4 dengan menekan button dibawah</h3>
+    <button onclick="handleExtendedAlphabetConversion()">
+      Proses Tugas Nomor 4
+    </button>
+    <h3>Proses Detail Tugas Nomor 4:</h3>
+    <div id="outputExtendedDetailedProcess"></div>
+    <h3>Hasil Angka Tugas Nomor 4:</h3>
+    <div id="outputExtendedNumbers"></div>
+    <h3>Hasil Akhir Huruf Tugas Nomor 4:</h3>
+    <div id="outputExtendedAlphabets"></div>
   </body>
 </html>
