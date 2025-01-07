@@ -175,7 +175,6 @@ function handleAlphabetConversion() {
 }
 
 // ========Jawaban untuk Tugas nomer 4 Code and Logic ==========================
-// Proses untuk tugas nomor 4
 function handleExtendedAlphabetConversion() {
   const inputText = document.getElementById("outputDetailedProcess").innerText;
   const explanationLines = inputText.split("\n");
@@ -215,4 +214,67 @@ function handleExtendedAlphabetConversion() {
     extendedNumberSequences.trim();
   document.getElementById("outputExtendedAlphabets").innerText =
     extendedAlphabets.trim();
+}
+
+// =================== Jawaban untuk Tugas Nomor 5 ============================
+function generateExplanationForTask5(numbers, newTarget) {
+  let sum = 0;
+  let currentSumArray = [];
+  const allowedNumbers = [1, 3, 5];
+
+  while (sum < newTarget) {
+    let number =
+      allowedNumbers[Math.floor(Math.random() * allowedNumbers.length)];
+    if (sum + number <= newTarget) {
+      currentSumArray.push(number);
+      sum += number;
+    }
+
+    if (currentSumArray.length === numbers.length) {
+      break;
+    }
+  }
+
+  return currentSumArray.join(" + ");
+}
+
+// Fungsi untuk menangani tugas nomor 5
+function handleTask5() {
+  const inputText = document.getElementById(
+    "outputExtendedDetailedProcess"
+  ).innerText;
+  const explanationLines = inputText.split("\n");
+
+  let task5DetailedProcess = "";
+  let task5NumberSequences = "";
+  let task5FinalNumbers = "";
+
+  explanationLines.forEach((line) => {
+    const [originalTarget, explanation] = line.split(" = ");
+    const target = parseInt(originalTarget);
+
+    const numbers = explanation.split(" + ").map(Number);
+
+    let numberToAdd = numbers.length % 2 === 0 ? 4 : 5;
+    const newTarget = target + numberToAdd;
+
+    const newExplanation = generateExplanationForTask5(numbers, newTarget);
+
+    const numberSequenceWithPlus = newExplanation;
+
+    const numberSequenceWithoutPlus = newExplanation
+      .replace(/\+/g, "")
+      .replace(/\s/g, "");
+
+    task5DetailedProcess += `${newTarget} = ${newExplanation}\n`;
+    task5NumberSequences += numberSequenceWithPlus + "\n";
+    task5FinalNumbers += numberSequenceWithoutPlus + "\n";
+  });
+
+  document.getElementById("outputTask5DetailedProcess").innerText =
+    task5DetailedProcess.trim();
+  document.getElementById("outputTask5Numbers").innerText =
+    task5NumberSequences.trim();
+  document.getElementById("outputTask5FinalNumbers").innerText =
+    task5FinalNumbers.trim();
 }

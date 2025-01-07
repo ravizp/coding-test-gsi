@@ -18,3 +18,30 @@ div {
   border-radius: 5px;
   margin-top: 10px;
 }
+
+/* Styling baru untuk output Tugas Nomor 5 */
+h3 {
+  color: #333;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 10px 0;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#outputExplorationResult {
+  background: #e0f7fa;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
